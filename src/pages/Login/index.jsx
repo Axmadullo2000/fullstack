@@ -1,5 +1,7 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { loginUserStart } from '../../redux/reducer'
 import Navbar from '../../components/Navbar'
 
 import logo from '../../assets/logo.svg'
@@ -7,12 +9,19 @@ import logo from '../../assets/logo.svg'
 import './Login.css'
 
 export const Login = () => {
+	const { isLoading } = useSelector(auth => auth.auth)
+	const dispatch = useDispatch()
+	const handlerSubmit = e => {
+		e.preventDefault()
+		dispatch(loginUserStart())
+	}
+
 	return (
 		<div>
 			<Navbar />
 			<div className='text-center'>
-				<form className='form-signin'>
-					<img src={logo} alt="" />
+				<form className='form-signin' onSubmit={handlerSubmit}>
+					<img src={logo} alt='' />
 					<h1 className='h3 mb-3 font-weight-normal'>Please sign in</h1>
 					<label htmlFor='inputEmail' className='sr-only'>
 						Email address
@@ -40,8 +49,13 @@ export const Login = () => {
 							<span>Remember me</span>
 						</label>
 					</div>
-					<button className='btn btn-lg btn-primary btn-block login_btn' type='submit'>
-						Sign in
+					<button
+						onClick={handlerSubmit}
+						disabled={isLoading}
+						className='btn btn-lg btn-primary btn-block login_btn'
+						type='submit'
+					>
+						{isLoading ? "loading..." : "Login"}
 					</button>
 				</form>
 			</div>

@@ -20,6 +20,7 @@ export const Register = () => {
 				<form className='form-signin' onSubmit={e => {
 					e.preventDefault()
 					navigate('/login')
+
 				}}>
 					<img src={logo} alt='' />
 					<h1 className='h3 mb-3 font-weight-normal'>Please Register</h1>
