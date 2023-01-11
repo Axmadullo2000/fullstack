@@ -1,27 +1,36 @@
 import React, { useState } from 'react'
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Navbar from '../../components/Navbar'
 
 import logo from '../../assets/logo.svg'
+import { registerUserStart } from '../../redux/reducer'
 
 export const Register = () => {
 	const [userName, setUserName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const { isLoading } = useSelector(auth => auth.auth)
 
-	console.log(userName, email, password)
+	const handleSubmit = e => {
+		e.preventDefault()
+		dispatch(registerUserStart())
+	}
 
 	return (
 		<div>
 			<Navbar />
 			<div className='text-center'>
-				<form className='form-signin' onSubmit={e => {
-					e.preventDefault()
-					navigate('/login')
-
-				}}>
+				<form
+					className='form-signin'
+					onSubmit={e => {
+						e.preventDefault()
+						navigate('/login')
+					}}
+				>
 					<img src={logo} alt='' />
 					<h1 className='h3 mb-3 font-weight-normal'>Please Register</h1>
 					<label htmlFor='inputUsername' className='sr-only'>
@@ -67,10 +76,12 @@ export const Register = () => {
 						</label>
 					</div>
 					<button
+						onClick={handleSubmit}
 						className='btn btn-lg btn-primary btn-block login_btn'
 						type='submit'
+						disabled={isLoading}
 					>
-						Register
+						{isLoading ? 'Loading...' : 'Register'}
 					</button>
 				</form>
 			</div>

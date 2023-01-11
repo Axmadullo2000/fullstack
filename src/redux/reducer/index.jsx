@@ -6,18 +6,25 @@ const initialState = {
 	isLoggedIn: false,
 }
 
-const RegisterSlice = createSlice({
-	name: 'RegisterSlice',
+const AuthSlice = createSlice({
+	name: 'AuthSlice',
 	initialState,
 	reducers: {
+		// LOGIN
 		loginUserStart: state => {
 			state.isLoading = true
 		},
 		loginUserSuccess: state => {},
 		loginUserFailed: state => {},
+		// REGISTER
+		registerUserStart: state => {
+			state.isLoading = true
+		},
+		registerUserSuccess: state => {},
+		registerUserFailed: state => {},
 	},
 })
 
-export const { loginUserStart } = RegisterSlice.actions
+export const { loginUserStart, registerUserStart } = AuthSlice.actions
 
-export default RegisterSlice.reducer
+export default AuthSlice.reducer
