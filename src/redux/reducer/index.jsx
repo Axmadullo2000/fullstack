@@ -4,7 +4,6 @@ const initialState = {
 	isLoading: false,
 	user: null,
 	isLoggedIn: false,
-	error: null,
 }
 
 const AuthSlice = createSlice({
@@ -21,23 +20,11 @@ const AuthSlice = createSlice({
 		registerUserStart: state => {
 			state.isLoading = true
 		},
-		registerUserSuccess: state => {
-			state.isLoading = false
-			state.isLoggedIn = true
-		},
-		registerUserFailed: state => {
-			state.isLoading = false
-			state.isLoggedIn = false
-			state.error = 'error'
-		},
+		registerUserSuccess: state => {},
+		registerUserFailed: state => {},
 	},
 })
 
-export const {
-	loginUserStart,
-	registerUserStart,
-	registerUserSuccess,
-	registerUserFailed,
-} = AuthSlice.actions
+export const { loginUserStart, registerUserStart } = AuthSlice.actions
 
 export default AuthSlice.reducer

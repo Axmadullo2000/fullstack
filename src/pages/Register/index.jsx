@@ -2,17 +2,10 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import AuthService from '../../service'
-
-import {
-	registerUserStart,
-	registerUserSuccess,
-	registerUserFailed,
-} from '../../redux/reducer'
-
 import Navbar from '../../components/Navbar'
 
 import logo from '../../assets/logo.svg'
+import { registerUserStart } from '../../redux/reducer'
 
 export const Register = () => {
 	const [userName, setUserName] = useState('')
@@ -21,19 +14,10 @@ export const Register = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const { isLoading } = useSelector(auth => auth.auth)
-	const user = { username: userName, email, password }
 
 	const handleSubmit = e => {
 		e.preventDefault()
 		dispatch(registerUserStart())
-		const response = AuthService.registerUser(user)
-		console.log(response)
-
-		try {
-			dispatch(registerUserSuccess())
-		} catch (error) {
-			dispatch(registerUserFailed())
-		}
 	}
 
 	return (
