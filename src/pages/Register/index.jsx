@@ -5,7 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import Navbar from '../../components/Navbar'
 
 import logo from '../../assets/logo.svg'
-import { registerUserStart } from '../../redux/reducer'
+import {
+	registerUserStart,
+	registerUserSuccess,
+	registerUserFailed,
+} from '../../redux/reducer'
+import AuthService from '../../service'
 
 export const Register = () => {
 	const [userName, setUserName] = useState('')
@@ -17,7 +22,21 @@ export const Register = () => {
 
 	const handleSubmit = e => {
 		e.preventDefault()
+
 		dispatch(registerUserStart())
+		const user = {
+			username: userName,
+			email,
+			password,
+		}
+
+		const response = AuthService.registerUser(user)
+
+		try {
+			dispatch(registerUserSuccess())
+		} catch (error) {
+			dispatch(registerUserFailed())
+		}
 	}
 
 	return (
