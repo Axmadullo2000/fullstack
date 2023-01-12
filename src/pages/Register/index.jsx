@@ -6,9 +6,9 @@ import Navbar from '../../components/Navbar'
 
 import logo from '../../assets/logo.svg'
 import {
-	registerUserStart,
-	registerUserSuccess,
-	registerUserFailed,
+	AuthUserStart,
+	AuthUserSuccess,
+	AuthUserFailed,
 } from '../../redux/reducer'
 import AuthService from '../../service'
 
@@ -20,22 +20,21 @@ export const Register = () => {
 	const dispatch = useDispatch()
 	const { isLoading } = useSelector(auth => auth.auth)
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault()
 
-		dispatch(registerUserStart())
+		dispatch(AuthUserStart())
 		const user = {
 			username: userName,
 			email,
 			password,
 		}
 
-		const response = AuthService.registerUser(user)
-
 		try {
-			dispatch(registerUserSuccess())
+			const response = await AuthService.registerUser(user)
+			dispatch(AuthUserSuccess())
 		} catch (error) {
-			dispatch(registerUserFailed())
+			dispatch(AuthUserFailed(error.response.data.errors))
 		}
 	}
 
