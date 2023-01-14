@@ -4,7 +4,7 @@ const initialState = {
 	isLoading: false,
 	isLoggedIn: false,
 	error: null,
-	user: null
+	user: null,
 }
 
 const AuthSlice = createSlice({
@@ -18,6 +18,7 @@ const AuthSlice = createSlice({
 			state.isLoading = false
 			state.isLoggedIn = true
 			state.user = action.payload
+			localStorage.setItem('token', action.payload.token)
 		},
 		AuthUserFailed: (state, action) => {
 			state.isLoading = false
