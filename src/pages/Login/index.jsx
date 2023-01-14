@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {
@@ -7,18 +8,19 @@ import {
 	AuthUserFailed,
 } from '../../redux/reducer'
 import Navbar from '../../components/Navbar'
-
-import logo from '../../assets/logo.svg'
+import { ErrorMessage } from '../../components/Error'
 
 import AuthService from '../../service'
 
+import logo from '../../assets/logo.svg'
+
 import './Login.css'
-import { ErrorMessage } from '../../components/Error'
 
 export const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const { isLoading, error } = useSelector(auth => auth.auth)
+	const { isLoading, error, isLoggedIn } = useSelector(auth => auth.auth)
+	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
 	const loginHandler = async e => {
@@ -30,10 +32,18 @@ export const Login = () => {
 		try {
 			const response = await AuthService.loginUser(user)
 			dispatch(AuthUserSuccess(response.user))
+			navigate("/")
+
 		} catch (error) {
 			dispatch(AuthUserFailed(error.response.data.errors))
 		}
 	}
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			navigate('/')
+		}
+	}, [])
 
 	return (
 		<div>
