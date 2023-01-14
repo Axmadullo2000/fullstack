@@ -13,11 +13,12 @@ import logo from '../../assets/logo.svg'
 import AuthService from '../../service'
 
 import './Login.css'
+import { ErrorMessage } from '../../components/Error'
 
 export const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const { isLoading } = useSelector(auth => auth.auth)
+	const { isLoading, error } = useSelector(auth => auth.auth)
 	const dispatch = useDispatch()
 
 	const loginHandler = async e => {
@@ -41,6 +42,9 @@ export const Login = () => {
 				<form className='form-signin' onSubmit={loginHandler}>
 					<img src={logo} alt='' />
 					<h1 className='h3 mb-3 font-weight-normal'>Please sign in</h1>
+					{error !== null && (
+						<ErrorMessage />
+					)}
 					<label htmlFor='inputEmail' className='sr-only'>
 						Email address
 					</label>

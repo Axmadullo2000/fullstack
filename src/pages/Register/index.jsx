@@ -11,6 +11,7 @@ import {
 	AuthUserFailed,
 } from '../../redux/reducer'
 import AuthService from '../../service'
+import { ErrorMessage } from '../../components/Error'
 
 export const Register = () => {
 	const [userName, setUserName] = useState('')
@@ -18,7 +19,7 @@ export const Register = () => {
 	const [password, setPassword] = useState('')
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const { isLoading } = useSelector(auth => auth.auth)
+	const { isLoading, error } = useSelector(auth => auth.auth)
 
 	const handleSubmit = async e => {
 		e.preventDefault()
@@ -32,7 +33,7 @@ export const Register = () => {
 
 		try {
 			const response = await AuthService.registerUser(user)
-			dispatch(AuthUserSuccess())
+			dispatch(AuthUserSuccess(response))
 		} catch (error) {
 			dispatch(AuthUserFailed(error.response.data.errors))
 		}
@@ -42,6 +43,9 @@ export const Register = () => {
 		<div>
 			<Navbar />
 			<div className='text-center'>
+				<img src={logo} alt='' />
+				<h1 className='h3 font-weight-normal'>Please Register</h1>
+				{error !== null && <ErrorMessage width={300} />}
 				<form
 					className='form-signin'
 					onSubmit={e => {
@@ -49,8 +53,6 @@ export const Register = () => {
 						navigate('/login')
 					}}
 				>
-					<img src={logo} alt='' />
-					<h1 className='h3 mb-3 font-weight-normal'>Please Register</h1>
 					<label htmlFor='inputUsername' className='sr-only'>
 						Username
 					</label>
