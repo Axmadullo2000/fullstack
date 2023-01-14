@@ -17,6 +17,7 @@ const Navbar = () => {
 
 			<nav className='d-inline-flex mt-2 mt-md-0 ms-md-auto'>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				{isLoggedIn ? (
 					<>
 						<span className='d-block mt-2' style={{ marginRight: '12px' }}>
@@ -41,6 +42,8 @@ const Navbar = () => {
 					</>
 				)}
 =======
+=======
+>>>>>>> parent of a09e54e (Navigate bugs checked)
 				<Link
 					className='me-3 py-2 text-dark text-decoration-none'
 					to='/register'
@@ -50,6 +53,9 @@ const Navbar = () => {
 				<Link className='me-3 py-2 text-dark text-decoration-none' to='/login'>
 					Login
 				</Link>
+<<<<<<< HEAD
+>>>>>>> parent of a09e54e (Navigate bugs checked)
+=======
 >>>>>>> parent of a09e54e (Navigate bugs checked)
 			</nav>
 		</div>

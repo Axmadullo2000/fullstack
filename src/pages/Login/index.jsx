@@ -14,7 +14,11 @@ import AuthService from '../../service'
 
 import './Login.css'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { setItem } from '../../helpers/person_storage'
+=======
+import { ErrorMessage } from '../../components/Error'
+>>>>>>> parent of a09e54e (Navigate bugs checked)
 =======
 import { ErrorMessage } from '../../components/Error'
 >>>>>>> parent of a09e54e (Navigate bugs checked)
@@ -35,8 +39,11 @@ export const Login = () => {
 			const response = await AuthService.loginUser(user)
 			dispatch(AuthUserSuccess(response.user))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			setItem('token', response.user.token)
 			navigate('/')
+=======
+>>>>>>> parent of a09e54e (Navigate bugs checked)
 =======
 >>>>>>> parent of a09e54e (Navigate bugs checked)
 		} catch (error) {
@@ -45,12 +52,15 @@ export const Login = () => {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	useEffect(() => {
 		if (isLoggedIn) {
 			navigate('/')
 		}
 	}, [isLoggedIn])
 
+=======
+>>>>>>> parent of a09e54e (Navigate bugs checked)
 =======
 >>>>>>> parent of a09e54e (Navigate bugs checked)
 	return (
