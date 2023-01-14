@@ -1,9 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import logo from '../assets/logo.svg'
 
 const Navbar = () => {
+	const { user, isLoggedIn } = useSelector(state => state.auth)
+
 	return (
 		<div className='d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom container'>
 			<Link
@@ -38,16 +41,6 @@ const Navbar = () => {
 						</Link>
 					</>
 				)}
-
-				<Link
-					className='me-3 py-2 text-dark text-decoration-none'
-					to='/register'
-				>
-					Register
-				</Link>
-				<Link className='me-3 py-2 text-dark text-decoration-none' to='/login'>
-					Login
-				</Link>
 			</nav>
 		</div>
 	)

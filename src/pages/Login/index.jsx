@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import {
 	AuthUserStart,
@@ -7,23 +8,20 @@ import {
 	AuthUserFailed,
 } from '../../redux/reducer'
 import Navbar from '../../components/Navbar'
-
-import logo from '../../assets/logo.svg'
+import { ErrorMessage } from '../../components/Error'
 
 import AuthService from '../../service'
 
+import logo from '../../assets/logo.svg'
+
 import './Login.css'
-import { setItem } from '../../helpers/person_storage'
-
-import { ErrorMessage } from '../../components/Error'
-
-import { ErrorMessage } from '../../components/Error'
 
 export const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const { isLoading, error } = useSelector(auth => auth.auth)
+	const { isLoading, error, isLoggedIn } = useSelector(auth => auth.auth)
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const loginHandler = async e => {
 		e.preventDefault()
@@ -34,9 +32,7 @@ export const Login = () => {
 		try {
 			const response = await AuthService.loginUser(user)
 			dispatch(AuthUserSuccess(response.user))
-			setItem('token', response.user.token)
 			navigate('/')
-
 		} catch (error) {
 			dispatch(AuthUserFailed(error.response.data.errors))
 		}
