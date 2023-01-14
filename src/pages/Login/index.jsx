@@ -13,15 +13,11 @@ import logo from '../../assets/logo.svg'
 import AuthService from '../../service'
 
 import './Login.css'
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { setItem } from '../../helpers/person_storage'
-=======
+
 import { ErrorMessage } from '../../components/Error'
->>>>>>> parent of a09e54e (Navigate bugs checked)
-=======
+
 import { ErrorMessage } from '../../components/Error'
->>>>>>> parent of a09e54e (Navigate bugs checked)
 
 export const Login = () => {
 	const [email, setEmail] = useState('')
@@ -38,31 +34,20 @@ export const Login = () => {
 		try {
 			const response = await AuthService.loginUser(user)
 			dispatch(AuthUserSuccess(response.user))
-<<<<<<< HEAD
-<<<<<<< HEAD
 			setItem('token', response.user.token)
 			navigate('/')
-=======
->>>>>>> parent of a09e54e (Navigate bugs checked)
-=======
->>>>>>> parent of a09e54e (Navigate bugs checked)
+
 		} catch (error) {
 			dispatch(AuthUserFailed(error.response.data.errors))
 		}
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	useEffect(() => {
 		if (isLoggedIn) {
 			navigate('/')
 		}
 	}, [isLoggedIn])
 
-=======
->>>>>>> parent of a09e54e (Navigate bugs checked)
-=======
->>>>>>> parent of a09e54e (Navigate bugs checked)
 	return (
 		<div>
 			<Navbar />
