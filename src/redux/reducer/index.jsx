@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { setItem } from '../../helpers/person_storage'
 
 const initialState = {
 	isLoading: false,
@@ -18,7 +19,7 @@ const AuthSlice = createSlice({
 			state.isLoading = false
 			state.isLoggedIn = true
 			state.user = action.payload
-			localStorage.setItem('token', action.payload.token)
+			console.log(action.payload.token)
 		},
 		AuthUserFailed: (state, action) => {
 			state.isLoading = false

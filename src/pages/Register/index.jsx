@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -12,6 +12,7 @@ import {
 } from '../../redux/reducer'
 import AuthService from '../../service'
 import { ErrorMessage } from '../../components/Error'
+import { setItem } from '../../helpers/person_storage'
 
 export const Register = () => {
 	const [userName, setUserName] = useState('')
@@ -19,7 +20,7 @@ export const Register = () => {
 	const [password, setPassword] = useState('')
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const { isLoading, error } = useSelector(auth => auth.auth)
+	const { isLoading, error, isLoggedIn } = useSelector(auth => auth.auth)
 
 	const handleSubmit = async e => {
 		e.preventDefault()
@@ -34,10 +35,17 @@ export const Register = () => {
 		try {
 			const response = await AuthService.registerUser(user)
 			dispatch(AuthUserSuccess(response))
+			setItem('token', response.user.token)
 		} catch (error) {
 			dispatch(AuthUserFailed(error.response.data.errors))
 		}
 	}
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			navigate('/')
+		}
+	}, [isLoggedIn])
 
 	return (
 		<div>

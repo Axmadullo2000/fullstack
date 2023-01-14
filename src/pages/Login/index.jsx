@@ -15,6 +15,7 @@ import AuthService from '../../service'
 import logo from '../../assets/logo.svg'
 
 import './Login.css'
+import { setItem } from '../../helpers/person_storage'
 
 export const Login = () => {
 	const [email, setEmail] = useState('')
@@ -32,8 +33,8 @@ export const Login = () => {
 		try {
 			const response = await AuthService.loginUser(user)
 			dispatch(AuthUserSuccess(response.user))
-			navigate("/")
-
+			setItem('token', response.user.token)
+			navigate('/')
 		} catch (error) {
 			dispatch(AuthUserFailed(error.response.data.errors))
 		}
@@ -43,7 +44,7 @@ export const Login = () => {
 		if (isLoggedIn) {
 			navigate('/')
 		}
-	}, [])
+	}, [isLoggedIn])
 
 	return (
 		<div>
@@ -52,9 +53,7 @@ export const Login = () => {
 				<form className='form-signin' onSubmit={loginHandler}>
 					<img src={logo} alt='' />
 					<h1 className='h3 mb-3 font-weight-normal'>Please sign in</h1>
-					{error !== null && (
-						<ErrorMessage />
-					)}
+					{error !== null && <ErrorMessage />}
 					<label htmlFor='inputEmail' className='sr-only'>
 						Email address
 					</label>

@@ -21,7 +21,7 @@ const Navbar = () => {
 				{isLoggedIn ? (
 					<>
 						<span className='d-block mt-2' style={{ marginRight: '12px' }}>
-							{user.username}
+							{user && user.username}
 						</span>
 						<button className='btn btn-outline-danger'>Logout</button>
 					</>
