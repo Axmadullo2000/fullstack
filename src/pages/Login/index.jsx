@@ -19,7 +19,7 @@ import './Login.css'
 export const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const { isLoading, error, isLoggedIn } = useSelector(auth => auth.auth)
+	const { isLoading, isLoggedIn, error } = useSelector(auth => auth.auth)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
@@ -31,10 +31,12 @@ export const Login = () => {
 
 		try {
 			const response = await AuthService.loginUser(user)
+			console.log(response)
 			dispatch(AuthUserSuccess(response.user))
 			navigate('/')
 		} catch (error) {
 			dispatch(AuthUserFailed(error.response.data.errors))
+			console.log(error.response.data.errors)
 		}
 	}
 
@@ -51,7 +53,7 @@ export const Login = () => {
 				<form className='form-signin' onSubmit={loginHandler}>
 					<img src={logo} alt='' />
 					<h1 className='h3 mb-3 font-weight-normal'>Please sign in</h1>
-					{error !== null && <ErrorMessage />}
+					{error && <ErrorMessage width={300} />}
 					<label htmlFor='inputEmail' className='sr-only'>
 						Email address
 					</label>

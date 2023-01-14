@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+
 import { setItem } from '../../helpers/person_storage'
 
 const initialState = {
@@ -19,15 +20,25 @@ const AuthSlice = createSlice({
 			state.isLoading = false
 			state.isLoggedIn = true
 			state.user = action.payload
+			state.error = null
+			setItem('token', action.payload.token)
 		},
 		AuthUserFailed: (state, action) => {
 			state.isLoading = false
 			state.error = action.payload
 		},
+		AuthLogoutUser: state => {
+			state.user = null
+			state.isLoggedIn = false
+		},
 	},
 })
 
-export const { AuthUserStart, AuthUserSuccess, AuthUserFailed } =
-	AuthSlice.actions
+export const {
+	AuthUserStart,
+	AuthUserSuccess,
+	AuthUserFailed,
+	AuthLogoutUser,
+} = AuthSlice.actions
 
 export default AuthSlice.reducer

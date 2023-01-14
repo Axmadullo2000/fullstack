@@ -13,10 +13,7 @@ const ErrorMessage = ({ width }) => {
 
 	return (
 		error !== null && (
-			<div
-				className='alert alert-danger m-auto mb-2 w-2'
-				style={{ width }}
-			>
+			<div className='alert alert-danger m-auto mb-2 w-2' style={{ width }}>
 				{handleError().map((error, index) => (
 					<p key={index} className='p-1 m-1 text-center '>
 						{index + 1}) {error}

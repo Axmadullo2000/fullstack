@@ -1,11 +1,19 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 import logo from '../assets/logo.svg'
+import { removeItem } from '../helpers/person_storage'
+import { AuthLogoutUser } from '../redux/reducer'
 
 const Navbar = () => {
 	const { user, isLoggedIn } = useSelector(state => state.auth)
+	const dispatch = useDispatch(state => state.auth)
+	const navigate = useNavigate()
+	const logout = () => {
+		removeItem('token')
+		dispatch(AuthLogoutUser())
+		navigate('/login')
+	}
 
 	return (
 		<div className='d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom container'>
@@ -23,7 +31,9 @@ const Navbar = () => {
 						<span className='d-block mt-2' style={{ marginRight: '12px' }}>
 							{user && user.username}
 						</span>
-						<button className='btn btn-outline-danger'>Logout</button>
+						<button onClick={logout} className='btn btn-outline-danger'>
+							Logout
+						</button>
 					</>
 				) : (
 					<>

@@ -34,7 +34,7 @@ export const Register = () => {
 
 		try {
 			const response = await AuthService.registerUser(user)
-			dispatch(AuthUserSuccess(response))
+			dispatch(AuthUserSuccess(response.user))
 			setItem('token', response.user.token)
 		} catch (error) {
 			dispatch(AuthUserFailed(error.response.data.errors))
