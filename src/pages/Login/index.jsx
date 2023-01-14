@@ -1,5 +1,4 @@
-import { useNavigate } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {
@@ -8,20 +7,22 @@ import {
 	AuthUserFailed,
 } from '../../redux/reducer'
 import Navbar from '../../components/Navbar'
-import { ErrorMessage } from '../../components/Error'
-
-import AuthService from '../../service'
 
 import logo from '../../assets/logo.svg'
 
+import AuthService from '../../service'
+
 import './Login.css'
+<<<<<<< HEAD
 import { setItem } from '../../helpers/person_storage'
+=======
+import { ErrorMessage } from '../../components/Error'
+>>>>>>> parent of a09e54e (Navigate bugs checked)
 
 export const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const { isLoading, error, isLoggedIn } = useSelector(auth => auth.auth)
-	const navigate = useNavigate()
+	const { isLoading, error } = useSelector(auth => auth.auth)
 	const dispatch = useDispatch()
 
 	const loginHandler = async e => {
@@ -33,19 +34,25 @@ export const Login = () => {
 		try {
 			const response = await AuthService.loginUser(user)
 			dispatch(AuthUserSuccess(response.user))
+<<<<<<< HEAD
 			setItem('token', response.user.token)
 			navigate('/')
+=======
+>>>>>>> parent of a09e54e (Navigate bugs checked)
 		} catch (error) {
 			dispatch(AuthUserFailed(error.response.data.errors))
 		}
 	}
 
+<<<<<<< HEAD
 	useEffect(() => {
 		if (isLoggedIn) {
 			navigate('/')
 		}
 	}, [isLoggedIn])
 
+=======
+>>>>>>> parent of a09e54e (Navigate bugs checked)
 	return (
 		<div>
 			<Navbar />

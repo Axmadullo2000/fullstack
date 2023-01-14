@@ -12,6 +12,7 @@ import { AuthUserFailed, AuthUserSuccess } from './redux/reducer'
 import { getItem } from './helpers/person_storage'
 
 function App() {
+<<<<<<< HEAD
 	const dispatch = useDispatch()
 	const { isLoggedIn } = useSelector(state => state.auth)
 
@@ -31,6 +32,8 @@ function App() {
 		}
 	}, [token])
 
+=======
+>>>>>>> parent of a09e54e (Navigate bugs checked)
 	return (
 		<div className='App'>
 			<Routes>
