@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import HomePage from './pages/HomePage'
 import { Register } from './pages/Register'
@@ -8,15 +8,15 @@ import { Login } from './pages/Login'
 import AuthService from './service'
 import { AuthUserSuccess } from './redux/Slice/AuthSlice'
 import { NotFound } from './components/NotFound'
-import { getItem, removeItem } from './helpers/person_storage'
+import { getItem } from './helpers/person_storage'
 
 import './App.css'
 import { articleData } from './service/article'
 import {
-	ArticleDataError,
 	ArticleDataStart,
 	ArticleDataSuccess,
 } from './redux/Slice/ArticlesSlice'
+import { ArticleDetail } from './pages/ArticleDetail'
 
 function App() {
 	const dispatch = useDispatch()
@@ -24,7 +24,6 @@ function App() {
 	const userData = async () => {
 		try {
 			const response = await AuthService.getUser()
-			console.log(response)
 			dispatch(AuthUserSuccess(response.user))
 		} catch (error) {
 			console.log(error)
@@ -53,6 +52,7 @@ function App() {
 				<Route path='/' element={<HomePage />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<Login />} />
+				<Route path='/article/:slug' element={<ArticleDetail />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</div>

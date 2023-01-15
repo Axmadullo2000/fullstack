@@ -4,6 +4,7 @@ const initialState = {
 	loading: false,
 	articles: [],
 	error: null,
+	detailArticles: [],
 }
 
 export const ArticlesSlice = createSlice({
@@ -22,9 +23,22 @@ export const ArticlesSlice = createSlice({
 			state.loading = false
 			state.error = action.payload
 		},
+		DetailArticleStart: state => {
+			state.loading = true
+		},
+		DetailArticleSuccess: (state, action) => {
+			state.loading = false
+			state.detailArticles = action.payload
+			state.error = null
+		},
 	},
 })
 
-export const { ArticleDataStart, ArticleDataSuccess, ArticleDataError } =
-	ArticlesSlice.actions
+export const {
+	ArticleDataStart,
+	ArticleDataSuccess,
+	ArticleDataError,
+	DetailArticleStart,
+	DetailArticleSuccess,
+} = ArticlesSlice.actions
 export default ArticlesSlice.reducer

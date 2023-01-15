@@ -1,9 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export const Main = () => {
-	const { articles, loading } = useSelector(state => state.article)
-	console.log(loading)
+	const { articles } = useSelector(state => state.article)
+	const navigate = useNavigate()
 
 	return (
 		<div className='container'>
@@ -28,12 +29,18 @@ export const Main = () => {
 								<rect width='100%' height='100%' fill='#55595c'></rect>
 							</svg>
 							<div className='card-body h-' style={{ height: '145px' }}>
-								<p className='card-text text-primary'>{article.title}</p>
+								<p
+									className='card-text text-primary' role="button"
+									onClick={() => navigate(`/article/${article.slug}`)}
+								>
+									{article.title}
+								</p>
 								<p className='card-text text-success'>{article.description}</p>
 							</div>
 							<div className='card-footer d-flex justify-content-between align-items-center'>
 								<div className='btn-group'>
 									<button
+										onClick={() => navigate(`/article/${article.slug}`)}
 										role={'button'}
 										type='button'
 										className='btn btn-sm btn-outline-secondary m-2 p-2'
