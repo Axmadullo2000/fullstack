@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import logo from '../assets/logo.svg'
 import { removeItem } from '../helpers/person_storage'
-import { AuthLogoutUser } from '../redux/reducer'
+import { AuthLogoutUser } from '../redux/Slice/AuthSlice'
 
 const Navbar = () => {
 	const { user, isLoggedIn } = useSelector(state => state.auth)

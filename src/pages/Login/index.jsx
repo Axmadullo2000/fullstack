@@ -6,7 +6,7 @@ import {
 	AuthUserStart,
 	AuthUserSuccess,
 	AuthUserFailed,
-} from '../../redux/reducer'
+} from '../../redux/Slice/AuthSlice'
 import Navbar from '../../components/Navbar'
 import { ErrorMessage } from '../../components/Error'
 

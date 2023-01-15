@@ -9,7 +9,7 @@ import {
 	AuthUserStart,
 	AuthUserSuccess,
 	AuthUserFailed,
-} from '../../redux/reducer'
+} from '../../redux/Slice/AuthSlice'
 import AuthService from '../../service'
 import { ErrorMessage } from '../../components/Error'
 import { setItem } from '../../helpers/person_storage'
