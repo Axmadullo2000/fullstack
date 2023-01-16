@@ -7,7 +7,6 @@ import {
 	CreateArticleStart,
 	CreateArticleSuccess,
 } from '../../redux/Slice/ArticlesSlice'
-
 import Navbar from '../../components/Navbar'
 import { articleData } from '../../service/article'
 
@@ -32,13 +31,12 @@ export const CreateArticle = () => {
 			dispatch(CreateArticleError())
 			console.log(error)
 		}
+		navigate('/')
 	}
 
 	const handlerSubmit = e => {
 		e.preventDefault()
 		addPost()
-		console.log(data)
-		navigate('/')
 	}
 
 	return (

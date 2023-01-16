@@ -17,8 +17,8 @@ export const articleData = {
 		return data
 	},
 
-	async updateArticle(slug) {
-		const { data } = await axios.put(`/articles/${slug}`)
+	async updateArticle(slug, article) {
+		const { data } = await axios.put(`/articles/${slug}`, { article })
 		return data
 	},
 
