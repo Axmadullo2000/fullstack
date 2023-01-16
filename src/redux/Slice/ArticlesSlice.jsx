@@ -23,6 +23,7 @@ export const ArticlesSlice = createSlice({
 			state.loading = false
 			state.error = action.payload
 		},
+
 		DetailArticleStart: state => {
 			state.loading = true
 		},
@@ -32,15 +33,15 @@ export const ArticlesSlice = createSlice({
 			state.error = null
 		},
 
-		ArticleCreateStart: state => {
+		CreateArticleStart: state => {
 			state.loading = true
 		},
-		ArticleCreateSuccess: state => {
+		CreateArticleSuccess: state => {
 			state.loading = false
+			state.error = null
 		},
-		ArticleCreateError: state => {
+		CreateArticleError: state => {
 			state.loading = false
-			state.error = 'Error'
 		},
 	},
 })
@@ -49,10 +50,12 @@ export const {
 	ArticleDataStart,
 	ArticleDataSuccess,
 	ArticleDataError,
+
 	DetailArticleStart,
 	DetailArticleSuccess,
-	ArticleCreateStart,
-	ArticleCreateSuccess,
-	ArticleCreateError,
+
+	CreateArticleStart,
+	CreateArticleSuccess,
+	CreateArticleError,
 } = ArticlesSlice.actions
 export default ArticlesSlice.reducer

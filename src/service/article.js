@@ -13,7 +13,17 @@ export const articleData = {
 	},
 
 	async postArticle(article) {
-		const { data } = await axios.post('/articles', { article })
+		const { data } = await axios.post('/articles/', { article })
+		return data
+	},
+
+	async updateArticle(slug) {
+		const { data } = await axios.put(`/articles/${slug}`)
+		return data
+	},
+
+	async deletePost(slug) {
+		const { data } = await axios.delete(`/articles/${slug}`)
 		return data
 	},
 }

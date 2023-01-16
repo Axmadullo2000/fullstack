@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import Navbar from '../../components/Navbar'
 import {
-	ArticleCreateError,
-	ArticleCreateStart,
-	ArticleCreateSuccess,
+	CreateArticleError,
+	CreateArticleStart,
+	CreateArticleSuccess,
 } from '../../redux/Slice/ArticlesSlice'
+
+import Navbar from '../../components/Navbar'
 import { articleData } from '../../service/article'
 
 export const CreateArticle = () => {
@@ -15,26 +16,28 @@ export const CreateArticle = () => {
 	const [description, setDescription] = useState('')
 	const [body, setBody] = useState(null)
 	const dispatch = useDispatch()
-	const navigate = useNavigate()
 	const { loading } = useSelector(state => state.article)
+
+	const navigate = useNavigate()
 
 	const data = { title, description, body }
 
-	const createArticle = async () => {
-		console.log(data)
-		dispatch(ArticleCreateStart())
+	const addPost = async () => {
+		dispatch(CreateArticleStart())
 
 		try {
 			await articleData.postArticle(data)
-			dispatch(ArticleCreateSuccess())
+			dispatch(CreateArticleSuccess())
 		} catch (error) {
-			dispatch(ArticleCreateError())
+			dispatch(CreateArticleError())
+			console.log(error)
 		}
 	}
 
 	const handlerSubmit = e => {
 		e.preventDefault()
-		createArticle()
+		addPost()
+		console.log(data)
 		navigate('/')
 	}
 

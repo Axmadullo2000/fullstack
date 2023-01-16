@@ -7,8 +7,9 @@ import { AuthLogoutUser } from '../redux/Slice/AuthSlice'
 
 const Navbar = () => {
 	const { user, isLoggedIn } = useSelector(state => state.auth)
-	const dispatch = useDispatch(state => state.auth)
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
+
 	const logout = () => {
 		removeItem('token')
 		dispatch(AuthLogoutUser())
@@ -28,7 +29,10 @@ const Navbar = () => {
 			<nav className='d-inline-flex mt-2 mt-md-0 ms-md-auto'>
 				{isLoggedIn ? (
 					<>
-						<Link to='/article/create' className='d-block text-decoration-none text-secondary mt-2'>
+						<Link
+							to='/article/create'
+							className='d-block text-decoration-none text-secondary mt-2'
+						>
 							Create Article
 						</Link>
 						<span className='d-block mt-2 mx-4' style={{ marginRight: '12px' }}>

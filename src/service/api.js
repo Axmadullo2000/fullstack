@@ -9,8 +9,6 @@ axios.interceptors.request.use(config => {
 	const authorization = token !== null ? `Token ${token}` : ''
 	config.headers.Authorization = authorization
 	return config
-
-	// console.log(authorization)
 })
 
 export default axios
