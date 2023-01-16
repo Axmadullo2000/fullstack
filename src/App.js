@@ -2,21 +2,20 @@ import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
+import { AuthUserSuccess } from './redux/Slice/AuthSlice'
+
+import { getItem } from './helpers/person_storage'
+import AuthService from './service'
+
+import { NotFound } from './components/NotFound'
+
+import { Login } from './pages/Login'
 import HomePage from './pages/HomePage'
 import { Register } from './pages/Register'
-import { Login } from './pages/Login'
-import AuthService from './service'
-import { AuthUserSuccess } from './redux/Slice/AuthSlice'
-import { NotFound } from './components/NotFound'
-import { getItem } from './helpers/person_storage'
+import { ArticleDetail } from './pages/ArticleDetail'
+import { CreateArticle } from './pages/CreateArticle'
 
 import './App.css'
-import { articleData } from './service/article'
-import {
-	ArticleDataStart,
-	ArticleDataSuccess,
-} from './redux/Slice/ArticlesSlice'
-import { ArticleDetail } from './pages/ArticleDetail'
 
 function App() {
 	const dispatch = useDispatch()
@@ -30,20 +29,9 @@ function App() {
 		}
 	}
 
-	const fetchArticles = async () => {
-		dispatch(ArticleDataStart())
-		try {
-			const response = await articleData.getArticles()
-			dispatch(ArticleDataSuccess(response.articles))
-		} catch (error) {
-			dispatch(error.message)
-		}
-	}
-
 	const token = getItem('token')
 	useEffect(() => {
 		userData()
-		fetchArticles()
 	}, [token])
 
 	return (
@@ -53,6 +41,7 @@ function App() {
 				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/article/:slug' element={<ArticleDetail />} />
+				<Route path='/article/create' element={<CreateArticle />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</div>

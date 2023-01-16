@@ -37,20 +37,28 @@ export const ArticleDetail = () => {
 			) : (
 				<>
 					<Navbar />
-					<img src={detailArticles.author} alt='' />
 					<div className='p-0 mb-2 bg-light rounded-3 container'>
 						<div className='py-5 px-5'>
+							{detailArticles.author !== undefined && (
+								<img src={detailArticles.author.image} alt='' />
+							)}
 							<h1 className='display-5 fw-bold'>{detailArticles.title}</h1>
 							<p className='col-md-8'>{detailArticles.description}</p>
 							<q>{detailArticles.body}</q>
-
-							<div className='mt-2'>
-								<p className="text-danger">Hey! Guys!</p>
-								<p className="text-black">My name is Axmadullo</p>
+							<div className='bg-success p-3 mt-1 border'>
+								<p className='text-black'>
+									{detailArticles.hasOwnProperty('author')
+										? detailArticles.author.username
+										: null}
+								</p>
+								<p>
+									{detailArticles.hasOwnProperty('author')
+										? detailArticles.author.bio
+										: null}
+								</p>
 							</div>
-
+							Date publishing:{' '}
 							<p className='mt-2 px-2 pt-2'>
-								Date publishing:{' '}
 								{moment(detailArticles.createdAt).format('DD MM YYYY')}
 							</p>
 							<p className='px-2'>
